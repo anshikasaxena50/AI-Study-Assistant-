@@ -1,10 +1,11 @@
 function askAI() {
     const question = document.getElementById("question").value;
+    const answer = document.getElementById("answer");
 
     if (question.trim() === "") {
-        alert("Please enter a question.");
+        answer.innerText = "Please enter a question.";
         return;
     }
 
-    alert("Your question is: " + question);
+    answer.innerText = "Your question is: " + question;
 }
