@@ -30,3 +30,14 @@ button {
     font-size: 16px;
     cursor: pointer;
 }
+#answer {
+    margin: 25px auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 500px;
+    background: white;
+    border-radius: 10px;
+    font-size: 17px;
+    color: #333;
+    min-height: 30px;
+}
