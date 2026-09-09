@@ -1,4 +1,4 @@
-function askAI() {
+async function askAI() {
     const question = document.getElementById("question").value;
     const answer = document.getElementById("answer");
 
@@ -7,5 +7,28 @@ function askAI() {
         return;
     }
 
-    answer.innerText = "Your question is: " + question;
+    answer.innerText = "Thinking...";
+
+    try {
+        const response = await fetch("YOUR_WORKER_URL", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                question: question
+            })
+        });
+
+        const data = await response.json();
+
+        if (data.error) {
+            answer.innerText = "Error: " + data.error;
+        } else {
+            answer.innerText = data.answer;
+        }
+
+    } catch (error) {
+        answer.innerText = "Unable to connect to AI. Please try again.";
+    }
 }
