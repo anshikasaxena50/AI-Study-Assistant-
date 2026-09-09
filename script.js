@@ -7,7 +7,7 @@ async function askAI() {
         return;
     }
 
-    answer.innerText = "Thinking...";
+    answer.innerText = "TESTING...";
 
     const response = await fetch("https://ai-study-assistant.anshikasaxena50.workers.dev", {
             method: "POST",
