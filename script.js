@@ -1,4 +1,4 @@
-async function askAI() {
+function askAI() {
     const question = document.getElementById("question").value;
     const answer = document.getElementById("answer");
 
