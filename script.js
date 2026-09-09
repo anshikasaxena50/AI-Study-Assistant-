@@ -9,8 +9,7 @@ async function askAI() {
 
     answer.innerText = "Thinking...";
 
-    try {
-        const response = await fetch("YOUR_WORKER_URL", {
+    const response = await fetch("https://ai-study-assistant.anshikasaxena50.workers.dev", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
