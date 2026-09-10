@@ -16,6 +16,7 @@ function formatAnswer(text) {
         .replace(/\n/g, "<br>");
 }
 
+
 async function askAI() {
     const question = document.getElementById("question").value;
     const answer = document.getElementById("answer");
@@ -28,15 +29,18 @@ async function askAI() {
     answer.innerText = "Thinking...";
 
     try {
-        const response = await fetch("https://ai-study-assistant.anshikasaxena50.workers.dev", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                question: question
-            })
-        });
+        const response = await fetch(
+            "https://ai-study-assistant.anshikasaxena50.workers.dev",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    question: question
+                })
+            }
+        );
 
         const data = await response.json();
 
@@ -47,10 +51,14 @@ async function askAI() {
         }
 
     } catch (error) {
-        answer.innerText = "Unable to connect to AI. Please try again.";
+        answer.innerText =
+            "Unable to connect to AI. Please try again.";
+
         console.error(error);
     }
 }
+
+
 async function makeNotes() {
     const question = document.getElementById("question").value;
     const answer = document.getElementById("answer");
@@ -63,13 +71,15 @@ async function makeNotes() {
     answer.innerText = "📝 Creating your notes...";
 
     try {
-        const response = await fetch("https://ai-study-assistant.anshikasaxena50.workers.dev", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                question: `Create clear, student-friendly study notes on this topic: ${question}
+        const response = await fetch(
+            "https://ai-study-assistant.anshikasaxena50.workers.dev",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    question: `Create clear, student-friendly study notes on this topic: ${question}
 
 Use:
 - A short definition
@@ -79,8 +89,9 @@ Use:
 - A short summary at the end
 
 Keep the notes well organized and easy to revise.`
-            })
-        });
+                })
+            }
+        );
 
         const data = await response.json();
 
@@ -91,33 +102,37 @@ Keep the notes well organized and easy to revise.`
         }
 
     } catch (error) {
-        answer.innerText = "Unable to create notes. Please try again.";
+        answer.innerText =
+            "Unable to create notes. Please try again.";
+
         console.error(error);
     }
 }
+
+
 async function handwrittenNotes() {
     const question = document.getElementById("question").value;
     const answer = document.getElementById("answer");
 
     if (question.trim() === "") {
-        answer.innerText = "Please enter a topic for handwritten notes.";
+        answer.innerText =
+            "Please enter a topic for handwritten notes.";
         return;
     }
 
-    answer.innerText = "✍️ Creating your handwritten notes...";
-
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 20000);
+    answer.innerText =
+        "✍️ Creating your handwritten notes...";
 
     try {
-        const response = await fetch("https://ai-study-assistant.anshikasaxena50.workers.dev", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            signal: controller.signal,
-            body: JSON.stringify({
-                question: `Create clear and short study notes on: ${question}
+        const response = await fetch(
+            "https://ai-study-assistant.anshikasaxena50.workers.dev",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    question: `Create clear and short study notes on: ${question}
 
 Include:
 1. Simple definition
@@ -127,10 +142,9 @@ Include:
 5. Short summary
 
 Keep the notes easy for a college student to revise.`
-            })
-        });
-
-        clearTimeout(timeout);
+                })
+            }
+        );
 
         const data = await response.json();
 
@@ -145,18 +159,9 @@ Keep the notes easy for a college student to revise.`
         }
 
     } catch (error) {
-        clearTimeout(timeout);
-
-        if (error.name === "AbortError") {
-            answer.innerText = "⏳ AI is taking too long. Please try again.";
-        } else {
-            answer.innerText = "Unable to create handwritten notes. Please try again.";
-        }
+        answer.innerText =
+            "Unable to create handwritten notes. Please try again.";
 
         console.error(error);
     }
-}
-
-.handwritten-note strong {
-    color: #174a8b;
 }
