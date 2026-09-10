@@ -1,18 +1,22 @@
 function formatAnswer(text) {
     return text
-        .replace(/^### (.*)$/gm, "<h3>$1</h3>")
-        .replace(/^## (.*)$/gm, "<h2>$1</h2>")
-        .replace(/^# (.*)$/gm, "<h1>$1</h1>")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
         .replace(/\*\*\*(.*?)\*\*\*/g, "<strong><em>$1</em></strong>")
         .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
         .replace(/\*(.*?)\*/g, "<em>$1</em>")
+        .replace(/^### (.*)$/gm, "<h3>$1</h3>")
+        .replace(/^## (.*)$/gm, "<h2>$1</h2>")
+        .replace(/^# (.*)$/gm, "<h1>$1</h1>")
         .replace(/^---$/gm, "<hr>")
         .replace(/^\d+\.\s+(.*)$/gm, "<div class='list-item'>• $1</div>")
         .replace(/^\*\s+(.*)$/gm, "<div class='list-item'>• $1</div>")
         .replace(/\n\n/g, "<br><br>")
         .replace(/\n/g, "<br>");
 }
-async function askAI(answer.innerHTML = formatAnswer(data.answer);) {
+
+async function askAI() {
     const question = document.getElementById("question").value;
     const answer = document.getElementById("answer");
 
