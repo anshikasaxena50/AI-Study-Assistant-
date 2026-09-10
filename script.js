@@ -1,4 +1,3 @@
-console.log("AI Study Assistant loaded");
 async function askAI() {
     const question = document.getElementById("question").value;
     const answer = document.getElementById("answer");
@@ -8,9 +7,10 @@ async function askAI() {
         return;
     }
 
-    answer.innerText = "TESTING...";
+    answer.innerText = "Thinking...";
 
-    const response = await fetch("https://ai-study-assistant.anshikasaxena50.workers.dev", {
+    try {
+        const response = await fetch("https://ai-study-assistant.anshikasaxena50.workers.dev", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -30,5 +30,6 @@ async function askAI() {
 
     } catch (error) {
         answer.innerText = "Unable to connect to AI. Please try again.";
+        console.error(error);
     }
 }
