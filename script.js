@@ -108,3 +108,109 @@ Keep the notes well organized and easy to revise.`
         console.error(error);
     }
 }
+async function makeNotes() {
+    const question = document.getElementById("question").value;
+    const answer = document.getElementById("answer");
+
+    if (question.trim() === "") {
+        answer.innerText = "Please enter a topic for your notes.";
+        return;
+    }
+
+    answer.innerText = "📝 Creating your notes...";
+
+    try {
+        const response = await fetch(
+            "https://ai-study-assistant.anshikasaxena50.workers.dev",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    question: `Create clear, student-friendly study notes on this topic: ${question}
+
+Use:
+- A short definition
+- Important points
+- Key concepts
+- Examples where useful
+- A short summary at the end
+
+Keep the notes well organized and easy to revise.`
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        if (data.error) {
+            answer.innerText = "Error: " + data.error;
+        } else {
+            answer.innerHTML = formatAnswer(data.answer);
+        }
+
+    } catch (error) {
+        answer.innerText =
+            "Unable to create notes. Please try again.";
+
+        console.error(error);
+    }
+}
+
+
+async function handwrittenNotes() {
+    const question = document.getElementById("question").value;
+    const answer = document.getElementById("answer");
+
+    if (question.trim() === "") {
+        answer.innerText =
+            "Please enter a topic for handwritten notes.";
+        return;
+    }
+
+    answer.innerText =
+        "✍️ Creating your handwritten notes...";
+
+    try {
+        const response = await fetch(
+            "https://ai-study-assistant.anshikasaxena50.workers.dev",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    question: `Create clear and short study notes on: ${question}
+
+Include:
+1. Simple definition
+2. Important points
+3. Key concepts
+4. Examples if useful
+5. Short summary
+
+Keep the notes easy for a college student to revise.`
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        if (data.error) {
+            answer.innerText = "Error: " + data.error;
+        } else {
+            answer.innerHTML = `
+                <div class="handwritten-note">
+                    ${formatAnswer(data.answer)}
+                </div>
+            `;
+        }
+
+    } catch (error) {
+        answer.innerText =
+            "Unable to create handwritten notes. Please try again.";
+
+        console.error(error);
+    }
+}
