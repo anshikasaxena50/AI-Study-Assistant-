@@ -95,3 +95,19 @@ Keep the notes well organized and easy to revise.`
         console.error(error);
     }
 }
+function handwrittenNotes() {
+    const question = document.getElementById("question").value;
+    const answer = document.getElementById("answer");
+
+    if (question.trim() === "") {
+        answer.innerText = "Please enter a topic for handwritten notes.";
+        return;
+    }
+
+    answer.innerHTML = `
+        <div class="handwritten-note">
+            <h2>✍️ ${question}</h2>
+            <p>Creating your handwritten-style notes...</p>
+        </div>
+    `;
+}
