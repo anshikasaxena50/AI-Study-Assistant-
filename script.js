@@ -106,25 +106,31 @@ async function handwrittenNotes() {
 
     answer.innerText = "✍️ Creating your handwritten notes...";
 
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 20000);
+
     try {
         const response = await fetch("https://ai-study-assistant.anshikasaxena50.workers.dev", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
+            signal: controller.signal,
             body: JSON.stringify({
-                question: `Create short, clear study notes on: ${question}
+                question: `Create clear and short study notes on: ${question}
 
-Format the notes with:
-- A simple definition
-- Important points
-- Key concepts
-- Examples if useful
-- A short summary
+Include:
+1. Simple definition
+2. Important points
+3. Key concepts
+4. Examples if useful
+5. Short summary
 
-Keep everything easy for a college student to revise.`
+Keep the notes easy for a college student to revise.`
             })
         });
+
+        clearTimeout(timeout);
 
         const data = await response.json();
 
@@ -139,7 +145,14 @@ Keep everything easy for a college student to revise.`
         }
 
     } catch (error) {
-        answer.innerText = "Unable to create handwritten notes.";
+        clearTimeout(timeout);
+
+        if (error.name === "AbortError") {
+            answer.innerText = "⏳ AI is taking too long. Please try again.";
+        } else {
+            answer.innerText = "Unable to create handwritten notes. Please try again.";
+        }
+
         console.error(error);
     }
 }
