@@ -95,7 +95,7 @@ Keep the notes well organized and easy to revise.`
         console.error(error);
     }
 }
-function handwrittenNotes() {
+async function handwrittenNotes() {
     const question = document.getElementById("question").value;
     const answer = document.getElementById("answer");
 
@@ -104,10 +104,42 @@ function handwrittenNotes() {
         return;
     }
 
-    answer.innerHTML = `
-        <div class="handwritten-note">
-            <h2>✍️ ${question}</h2>
-            <p>Creating your handwritten-style notes...</p>
-        </div>
-    `;
+    answer.innerText = "✍️ Creating your handwritten notes...";
+
+    try {
+        const response = await fetch("https://ai-study-assistant.anshikasaxena50.workers.dev", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                question: `Create short, clear study notes on: ${question}
+
+Format the notes with:
+- A simple definition
+- Important points
+- Key concepts
+- Examples if useful
+- A short summary
+
+Keep everything easy for a college student to revise.`
+            })
+        });
+
+        const data = await response.json();
+
+        if (data.error) {
+            answer.innerText = "Error: " + data.error;
+        } else {
+            answer.innerHTML = `
+                <div class="handwritten-note">
+                    ${formatAnswer(data.answer)}
+                </div>
+            `;
+        }
+
+    } catch (error) {
+        answer.innerText = "Unable to create handwritten notes.";
+        console.error(error);
+    }
 }
