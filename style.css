@@ -41,3 +41,62 @@ button {
     color: #333;
     min-height: 30px;
 }
+.handwritten-note {
+    width: 90%;
+    max-width: 700px;
+    margin: 30px auto;
+    padding: 35px 40px;
+
+    text-align: left;
+
+    background:
+        repeating-linear-gradient(
+            transparent,
+            transparent 31px,
+            #b8d4ea 32px
+        );
+
+    background-color: #fffdf3;
+
+    border-left: 6px solid #e57373;
+    border-radius: 3px;
+
+    box-shadow: 3px 5px 15px rgba(0, 0, 0, 0.18);
+
+    font-family: "Segoe Print", "Bradley Hand", "Comic Sans MS", cursive;
+    font-size: 18px;
+    line-height: 32px;
+
+    color: #164f91;
+
+    transform: rotate(-0.3deg);
+}
+
+/* Handwritten-looking headings */
+.handwritten-note h1,
+.handwritten-note h2,
+.handwritten-note h3 {
+    font-family: "Segoe Print", "Bradley Hand", "Comic Sans MS", cursive;
+    color: #123f78;
+    margin-top: 12px;
+    margin-bottom: 8px;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+}
+
+/* Important words */
+.handwritten-note strong {
+    color: #123f78;
+    font-weight: bold;
+}
+
+/* Slight handwritten spacing */
+.handwritten-note .list-item {
+    margin-left: 10px;
+    padding-left: 5px;
+}
+
+/* Make the note feel less like a normal webpage */
+.handwritten-note br {
+    line-height: 32px;
+}
