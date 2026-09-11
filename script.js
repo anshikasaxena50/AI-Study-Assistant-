@@ -214,37 +214,3 @@ Keep the notes easy for a college student to revise.`
         console.error(error);
     }
 }
-.handwritten-note {
-    width: 90%;
-    max-width: 700px;
-    margin: 30px auto;
-    padding: 30px 35px;
-    text-align: left;
-
-    background-color: #fffef5;
-    background-image:
-        linear-gradient(#d6e4f0 1px, transparent 1px);
-    background-size: 100% 32px;
-
-    border-left: 5px solid #e57373;
-    border-radius: 4px;
-
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-
-    font-family: "Comic Sans MS", "Segoe Print", cursive;
-    font-size: 18px;
-    line-height: 32px;
-
-    color: #1d4f91;
-}
-
-.handwritten-note h1,
-.handwritten-note h2,
-.handwritten-note h3 {
-    color: #174a8b;
-    font-family: "Comic Sans MS", "Segoe Print", cursive;
-}
-
-.handwritten-note strong {
-    color: #174a8b;
-}
