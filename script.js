@@ -108,55 +108,6 @@ Keep the notes well organized and easy to revise.`
         console.error(error);
     }
 }
-async function makeNotes() {
-    const question = document.getElementById("question").value;
-    const answer = document.getElementById("answer");
-
-    if (question.trim() === "") {
-        answer.innerText = "Please enter a topic for your notes.";
-        return;
-    }
-
-    answer.innerText = "📝 Creating your notes...";
-
-    try {
-        const response = await fetch(
-            "https://ai-study-assistant.anshikasaxena50.workers.dev",
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    question: `Create clear, student-friendly study notes on this topic: ${question}
-
-Use:
-- A short definition
-- Important points
-- Key concepts
-- Examples where useful
-- A short summary at the end
-
-Keep the notes well organized and easy to revise.`
-                })
-            }
-        );
-
-        const data = await response.json();
-
-        if (data.error) {
-            answer.innerText = "Error: " + data.error;
-        } else {
-            answer.innerHTML = formatAnswer(data.answer);
-        }
-
-    } catch (error) {
-        answer.innerText =
-            "Unable to create notes. Please try again.";
-
-        console.error(error);
-    }
-}
 
 
 async function handwrittenNotes() {
